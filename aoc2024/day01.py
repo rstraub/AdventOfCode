@@ -1,7 +1,3 @@
-#!/usr/bin/env python3
-import sys
-
-
 def total_distance(path: str) -> int:
     contents = read_contents(path)
     left_list, right_list = parse_lists(contents)
@@ -38,5 +34,5 @@ def calculate_total_distance(left_list, right_list):
 
 
 if __name__ == "__main__":
-    file_path = sys.argv[1]
+    file_path = "aoc2024/input/day01.txt"
     print(total_distance(file_path))
