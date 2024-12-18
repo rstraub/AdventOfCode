@@ -1,3 +1,6 @@
+from utils.execution import read_input_and_execute_solution
+
+
 def calculate_number_of_safe_reports(reports) -> int:
     return sum(map(is_report_safe, reports))
 
@@ -47,9 +50,8 @@ def parse_reports(reports: str):
 
 
 if __name__ == "__main__":
-    file_path = "input/day02.txt"
-
-    with open(file_path, "r") as f:
-        contents = f.read()
-        print(calculate_number_of_safe_reports_from_unparsed(contents))
-        print(calculate_number_of_safe_reports_with_dampener_from_unparsed(contents))
+    read_input_and_execute_solution(
+        "input/day02.txt",
+        calculate_number_of_safe_reports_from_unparsed,
+        calculate_number_of_safe_reports_with_dampener_from_unparsed,
+    )
