@@ -1,6 +1,10 @@
 import pytest
 
-from aoc2024.day02 import calculate_number_of_safe_reports, report_is_safe
+from aoc2024.day02 import (
+    calculate_number_of_safe_reports,
+    report_is_safe,
+    parse_reports,
+)
 
 
 def test_calculate_number_of_safe_reports():
@@ -14,6 +18,15 @@ def test_calculate_number_of_safe_reports():
     """.strip()
 
     assert calculate_number_of_safe_reports(reports) == 2
+
+
+def test_parse_reports_returns_list_of_levels():
+    unparsed = """
+        7 6 4 2 1
+        1 2 7 8 9
+    """.strip()
+
+    assert parse_reports(unparsed) == ((7, 6, 4, 2, 1), (1, 2, 7, 8, 9))
 
 
 @pytest.mark.parametrize("report", [(7, 6, 4, 2, 1), (1, 3, 6, 7, 9)])
