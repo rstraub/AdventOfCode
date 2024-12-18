@@ -1,8 +1,8 @@
 def calculate_number_of_safe_reports(reports) -> int:
-    return sum(map(report_is_safe, reports))
+    return sum(map(is_report_safe, reports))
 
 
-def report_is_safe(report: tuple[int, ...]) -> bool:
+def is_report_safe(report: tuple[int, ...]) -> bool:
     left_levels = report[:-1]
     right_levels = report[1:]
     combinations = zip(left_levels, right_levels)
@@ -19,9 +19,17 @@ def in_safe_range(diff: int) -> bool:
     return 1 <= abs(diff) <= 3
 
 
+def is_report_safe_with_dampener(report: tuple[int, ...]) -> bool:
+    pass
+
+
 def calculate_number_of_safe_reports_from_unparsed(reports: str) -> int:
     parsed = parse_reports(reports)
     return calculate_number_of_safe_reports(parsed)
+
+
+def calculate_number_of_safe_reports_with_dampener_from_unparsed(reports: str) -> int:
+    pass
 
 
 def parse_reports(reports: str):
@@ -44,3 +52,4 @@ if __name__ == "__main__":
     with open(file_path, "r") as f:
         contents = f.read()
         print(calculate_number_of_safe_reports_from_unparsed(contents))
+        print(calculate_number_of_safe_reports_with_dampener_from_unparsed(contents))
