@@ -36,3 +36,11 @@ def parse_reports(reports: str):
         result.append(levels)
 
     return tuple(result)
+
+
+if __name__ == "__main__":
+    file_path = "input/day02.txt"
+
+    with open(file_path, "r") as f:
+        contents = f.read()
+        print(calculate_number_of_safe_reports_from_unparsed(contents))
