@@ -1,24 +1,8 @@
-def parse_reports(reports: str):
-    result = []
-
-    lines = reports.split("\n")
-    for line in lines:
-        cleaned = line.strip()
-
-        levels = tuple([int(level) for level in cleaned.split(" ")])
-
-        result.append(levels)
-
-    return tuple(result)
-
-
-def calculate_number_of_safe_reports(input: str) -> int:
-    print(input)
-    return -1
+def calculate_number_of_safe_reports(reports) -> int:
+    return sum(map(report_is_safe, reports))
 
 
 def report_is_safe(report: tuple[int, ...]) -> bool:
-    # Builds combinations
     left_levels = report[:-1]
     right_levels = report[1:]
     combinations = zip(left_levels, right_levels)
@@ -33,3 +17,22 @@ def report_is_safe(report: tuple[int, ...]) -> bool:
 
 def in_safe_range(diff: int) -> bool:
     return 1 <= abs(diff) <= 3
+
+
+def calculate_number_of_safe_reports_from_unparsed(reports: str) -> int:
+    parsed = parse_reports(reports)
+    return calculate_number_of_safe_reports(parsed)
+
+
+def parse_reports(reports: str):
+    result = []
+
+    lines = reports.split("\n")
+    for line in lines:
+        cleaned = line.strip()
+
+        levels = tuple([int(level) for level in cleaned.split(" ")])
+
+        result.append(levels)
+
+    return tuple(result)
