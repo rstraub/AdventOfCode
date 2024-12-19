@@ -2,7 +2,15 @@ from utils.execution import read_input_and_execute_solution
 
 
 def calculate_number_of_safe_reports(reports) -> int:
-    return sum(map(is_report_safe, reports))
+    return number_of_safe_reports_calculator(reports, is_report_safe)
+
+
+def calculate_number_of_safe_reports_with_dampener(reports) -> int:
+    return number_of_safe_reports_calculator(reports, is_report_safe_with_dampener)
+
+
+def number_of_safe_reports_calculator(reports, evaluation_fn) -> int:
+    return sum(map(evaluation_fn, reports))
 
 
 def is_report_safe(report: tuple[int, ...]) -> bool:
@@ -23,7 +31,16 @@ def in_safe_range(diff: int) -> bool:
 
 
 def is_report_safe_with_dampener(report: tuple[int, ...]) -> bool:
-    pass
+    if is_report_safe(report):
+        return True
+    else:
+        for index in range(len(report)):
+            copied_report = list(report)
+            del copied_report[index]
+
+            if is_report_safe(tuple(copied_report)):
+                return True
+        return False
 
 
 def calculate_number_of_safe_reports_from_unparsed(reports: str) -> int:
@@ -32,7 +49,8 @@ def calculate_number_of_safe_reports_from_unparsed(reports: str) -> int:
 
 
 def calculate_number_of_safe_reports_with_dampener_from_unparsed(reports: str) -> int:
-    pass
+    parsed = parse_reports(reports)
+    return calculate_number_of_safe_reports_with_dampener(parsed)
 
 
 def parse_reports(reports: str):
