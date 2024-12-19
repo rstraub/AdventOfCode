@@ -31,16 +31,13 @@ def in_safe_range(diff: int) -> bool:
 
 
 def is_report_safe_with_dampener(report: tuple[int, ...]) -> bool:
-    if is_report_safe(report):
-        return True
-    else:
-        for index in range(len(report)):
-            copied_report = list(report)
-            del copied_report[index]
+    for index in range(len(report)):
+        copied_report = list(report)
+        del copied_report[index]
 
-            if is_report_safe(tuple(copied_report)):
-                return True
-        return False
+        if is_report_safe(tuple(copied_report)):
+            return True
+    return False
 
 
 def calculate_number_of_safe_reports_from_unparsed(reports: str) -> int:
